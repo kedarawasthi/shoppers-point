@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div id="shippingAddress" [formGroup]="form" style="padding-top: 5px;">
+            
+            <div class="form-group col-md-4" formGroupName="shippingAddress" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="country" (ngModelChange)="listCountryStates('shippingAddress')">
+                      <mat-option *ngFor="let country of countries"  [value]="country">
+                        {{country.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)">
+                    <mat-error *ngIf="shippingAddressCountry.errors.required">Country is required</mat-error>
+                </div>
+            </div>
+            <div class="form-group col-md-4" formGroupName="shippingAddress" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Street</mat-label>
+                    <input matInput formControlName="street" type="text">
+                </mat-form-field>
+                <div *ngIf="shippingAddressStreet.invalid && (shippingAddressStreet.dirty || shippingAddressStreet.touched)">
+                    <mat-error *ngIf="shippingAddressStreet.errors.required">Street is required</mat-error>
+                    <mat-error *ngIf="shippingAddressStreet.errors.minlength">Street must be  at least 2 characters long</mat-error>
+                </div>
+            </div>
+            
+            <div class="form-group col-md-4" formGroupName="shippingAddress" >
+                <mat-form-field appearance="fill">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" type="text">
+                </mat-form-field>
+                <div *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)">
+                    <mat-error *ngIf="shippingAddressCity.errors.required">City is required</mat-error>
+                    <mat-error *ngIf="shippingAddressCity.errors.minlength">City must be  at least 2 characters long</mat-error>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" formGroupName="shippingAddress" >
+                <mat-form-field appearance="fill">
+                    <mat-label>State</mat-label>
+                    <mat-select formControlName="state">
+                      <mat-option *ngFor="let state of shippingAddressStates" [value]="state">
+                        {{state.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <div *ngIf="shippingAddressState.invalid && (shippingAddressState.dirty || shippingAddressState.touched)">
+                    <mat-error *ngIf="shippingAddressState.errors.required">State is required</mat-error>
+                </div>
+            </div>
+            <div class="form-group col-md-4" formGroupName="shippingAddress" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput formControlName="zipCode" type="text">
+                </mat-form-field>
+                <div *ngIf="shippingAddressZipCode.invalid && (shippingAddressZipCode.dirty || shippingAddressZipCode.touched)">
+                    <mat-error *ngIf="shippingAddressZipCode.errors.required">ZipCode is required</mat-error>
+                    <mat-error *ngIf="shippingAddressZipCode.errors.pattern">ZipCode must be 6 numbers long</mat-error>
+                </div>
+            </div>
+    </div>
+</div>
+
+<button mat-raised-button color="primary"  matStepperNext (click)="step2Submitted()">Next</button>

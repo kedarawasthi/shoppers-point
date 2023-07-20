@@ -1,0 +1,23 @@
+<mat-list >
+  <mat-list-item>
+    <a style="-webkit-text-fill-color: aliceblue;"   
+       routerLink="home" 
+       routerLinkActive="active-link"> 
+      Home 
+    </a>
+  </mat-list-item>
+  <div style="padding-left: 15px;-webkit-text-fill-color: aliceblue;">
+    Shop By Category
+  </div>
+  <mat-divider></mat-divider>  
+  <div >
+    <mat-list-item *ngFor="let tempProductCategory of productCategories">
+      <a style="-webkit-text-fill-color: darkblue;" routerLink="category/{{ tempProductCategory.id }}/{{ tempProductCategory.categoryName }}" routerLinkActive="active-link" >
+        {{ tempProductCategory.categoryName }}
+      </a>
+    </mat-list-item>
+  </div>
+    <mat-divider></mat-divider>
+  </mat-list>
+
+  

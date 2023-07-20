@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "9c4c3954-a8e9-4705-8d03-cd6bd58cca18",
+		"name": "shoppers-point",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6866046"
+	},
+	"item": [
+		{
+			"name": "get Products",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/search/findByNameContaining?name=python",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"search",
+						"findByNameContaining"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "python"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Countries",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/countries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStatesByCountryCode",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/states/search/findByCountryCode?code=IN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"states",
+						"search",
+						"findByCountryCode"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "IN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post purchase",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"customer\":{\r\n      \"firstName\":\"Neha\",\r\n      \"lastName\":\"Awasthi\",\r\n      \"email\":\"neha@gmail.com\"\r\n   },\r\n   \"shippingAddress\":{\r\n      \"street\":\"def en\",\r\n      \"city\":\"noida\",\r\n      \"state\":\"Uttar Pradesh\",\r\n      \"country\":\"India\",\r\n      \"zipCode\":\"281998\"\r\n   },\r\n   \"billingAddress\":{\r\n      \"street\":\"moti enc\",\r\n      \"city\":\"Mathura\",\r\n      \"state\":\"Uttar Pradesh\",\r\n      \"country\":\"India\",\r\n      \"zipCode\":\"281006\"\r\n   },\r\n   \"order\":{\r\n      \"totalPrice\":36.98,\r\n      \"totalQuantity\":2\r\n   },\r\n   \"orderItems\":[\r\n      {\r\n         \"imageUrl\":\"assets/images/products/coffeemugs/coffeemug-luv2code-1000.png\",\r\n         \"quantity\":1,\r\n         \"unitPrice\":18.99,\r\n         \"productId\":26\r\n      },\r\n      {\r\n         \"imageUrl\":\"assets/images/products/mousepads/mousepad-luv2code-1000.png\",\r\n         \"quantity\":1,\r\n         \"unitPrice\":17.99,\r\n         \"productId\":51\r\n      }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/checkout/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"checkout",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Products by Cat id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/search/findByCategoryId?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"search",
+						"findByCategoryId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductsByCatIdPagination",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/search/findByCategoryId?id=1&page=1&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"search",
+						"findByCategoryId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomersByEmail",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/search/findByCategoryId?id=1&page=1&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"search",
+						"findByCategoryId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Products Category",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "john",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\":\"kedar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/product-category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"product-category"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

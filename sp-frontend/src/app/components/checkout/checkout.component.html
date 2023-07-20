@@ -1,0 +1,392 @@
+<header>
+  <!-- Jumbotron -->
+  <div class="p-1 text-center bg-white border-bottom">
+    <div class="container">
+      <div class="d-flex justify-content-between">
+        <!-- Left elements -->
+
+        <div>
+          <a routerLink="home">
+            <img src="assets/images/logo.png" style="height:80px;">
+          </a>
+        </div>
+        <!-- Left elements -->
+
+        <!-- right elements -->
+        <div style="padding: 10px;" *ngIf="!isAuthenticated">
+          <button routerLink="/login" mat-raised-button color="primary">Sign in</button>
+        </div>
+        <!-- right elements -->
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+
+  <!-- Heading -->
+  <div class="bg-primary">
+    <div class="container py-4">
+      <!-- Breadcrumb -->
+      <nav class="d-flex">
+        <h6 class="mb-0">
+          <a routerLink="/home" class="text-white-50">Home</a>
+          <span class="text-white-50 mx-2"> > </span>
+          <a routerLink="/cart-details" class="text-white-50">2. Shopping cart</a>
+          <span class="text-white-50 mx-2"> > </span>
+          <a routerLink="/checkout" class="text-white"><u>3. Order info</u></a>
+          <span class="text-white-50 mx-2"> > </span>
+          <a class="text-white-50">4. Payment</a>
+        </h6>
+      </nav>
+      <!-- Breadcrumb -->
+    </div>
+  </div>
+  <!-- Heading -->
+</header>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 mb-4">
+
+
+        <!-- Checkout -->
+        <div class="card shadow-0 border">
+          <div class="p-4">
+            <h1 class="card-title mb-3">Checkout</h1>
+            <div class="row">
+              <div class="main-content">
+                <div class="container-fluid">
+                  <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+                    <!-- customer form group -->
+                    <div formGroupName="customer" class="form-area">
+                      <h3>Customer</h3>
+
+                      <div class="row">
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName" placeholder="fill first name">
+                          </mat-form-field>
+                          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                            <mat-error *ngIf="firstName.errors.required">firstName is required</mat-error>
+                            <mat-error *ngIf="firstName.errors.minlength">firstName must be at least 2 characters
+                              long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName" placeholder="fill last name">
+                          </mat-form-field>
+                          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                            <mat-error *ngIf="lastName.errors.required">lastName is required</mat-error>
+                            <mat-error *ngIf="lastName.errors.minlength">lastName must be at least 2 characters
+                              long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="fill email">
+                          </mat-form-field>
+                          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <mat-error *ngIf="email.errors.required">email is required</mat-error>
+                            <mat-error *ngIf="email.errors.pattern">email must be of type abc@csd.com</mat-error>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <mat-divider></mat-divider>
+                    <!-- shipping Address-->
+                    <div formGroupName="shippingAddress" class="form-area">
+                      <h3>Shipping Address</h3>
+
+
+                      <div class="row">
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Country</mat-label>
+                            <mat-select formControlName="country"
+                              (ngModelChange)="listCountryStates('shippingAddress')">
+                              <mat-option *ngFor="let country of countries" [value]="country"
+                                [ngValue]="country">{{country.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div
+                            *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)">
+                            <mat-error *ngIf="shippingAddressCountry.errors.required">Country is required</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>State</mat-label>
+                            <mat-select formControlName="state">
+                              <mat-option *ngFor="let state of shippingAddressStates" [value]="state"
+                                [ngValue]="state">{{state.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div
+                            *ngIf="shippingAddressState.invalid && (shippingAddressState.dirty || shippingAddressState.touched)">
+                            <mat-error *ngIf="shippingAddressState.errors.required">State is required</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Street</mat-label>
+                            <input matInput formControlName="street" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="shippingAddressStreet.invalid && (shippingAddressStreet.dirty || shippingAddressStreet.touched)">
+                            <mat-error *ngIf="shippingAddressStreet.errors.required">Street is required</mat-error>
+                            <mat-error *ngIf="shippingAddressStreet.errors.minlength">Street must be at least 2
+                              characters long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)">
+                            <mat-error *ngIf="shippingAddressCity.errors.required">City is required</mat-error>
+                            <mat-error *ngIf="shippingAddressCity.errors.minlength">City must be at least 2 characters
+                              long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Zip Code</mat-label>
+                            <input matInput formControlName="zipCode" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="shippingAddressZipCode.invalid && (shippingAddressZipCode.dirty || shippingAddressZipCode.touched)">
+                            <mat-error *ngIf="shippingAddressZipCode.errors.required">ZipCode is required</mat-error>
+                            <mat-error *ngIf="shippingAddressZipCode.errors.pattern">ZipCode must be 6 numbers
+                              long</mat-error>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <!-- Add check box to copy shipping to billing -->
+                    <div class="input-space">
+                      <label class="au-checkbox">
+                        <mat-checkbox (change)="copyShippingAddressToBillingAddress($event.checked)">
+                          Billing Address same as Shipping Address
+                        </mat-checkbox>
+                      </label>
+                    </div>
+
+                    <!-- Billing Address-->
+                    <div formGroupName="billingAddress" class="form-area">
+                      <h3>Billing Address</h3>
+
+                      <div class="row">
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Country</mat-label>
+                            <mat-select formControlName="country" (ngModelChange)="listCountryStates('billingAddress')">
+                              <mat-option *ngFor="let country of countries " [ngValue]="country" [value]="country">
+                                {{country.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div
+                            *ngIf="billingAddressCountry.invalid && (billingAddressCountry.dirty || billingAddressCountry.touched)">
+                            <mat-error *ngIf="billingAddressCountry.errors.required">Country is required</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>State</mat-label>
+                            <mat-select formControlName="state">
+                              <mat-option *ngFor="let state of billingAddressStates" [ngValue]="state"
+                                [value]="state">{{state.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div
+                            *ngIf="billingAddressState.invalid && (billingAddressState.dirty || billingAddressState.touched)">
+                            <mat-error *ngIf="billingAddressState.errors.required">State is required</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Street</mat-label>
+                            <input matInput formControlName="street" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="billingAddressStreet.invalid && (billingAddressStreet.dirty || billingAddressStreet.touched)">
+                            <mat-error *ngIf="billingAddressStreet.errors.required">Street is required</mat-error>
+                            <mat-error *ngIf="billingAddressStreet.errors.minlength">Street must be at least 2
+                              characters long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)">
+                            <mat-error *ngIf="billingAddressCity.errors.required">City is required</mat-error>
+                            <mat-error *ngIf="billingAddressCity.errors.minlength">City must be at least 2 characters
+                              long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Zip Code</mat-label>
+                            <input matInput formControlName="zipCode" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="billingAddressZipCode.invalid && (billingAddressZipCode.dirty || billingAddressZipCode.touched)">
+                            <mat-error *ngIf="billingAddressZipCode.errors.required">ZipCode is required</mat-error>
+                            <mat-error *ngIf="billingAddressZipCode.errors.pattern">ZipCode must be 6 numbers
+                              long</mat-error>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <!-- Credit Card-->
+                    <div formGroupName="creditCard" class="form-area">
+                      <h3>Credit Card</h3>
+
+                      <div class="row">
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Card Type</mat-label>
+                            <mat-select formControlName="cardType">
+                              <mat-option value="visa">Visa</mat-option>
+                              <mat-option value="mastercard">MasterCard</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div *ngIf="creditCardType.invalid && (creditCardType.dirty || creditCardType.touched)">
+                            <mat-error *ngIf="creditCardType.errors.required">Card Type is required</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Name on card</mat-label>
+                            <input matInput formControlName="nameOnCard" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="creditCardNameOnCard.invalid && (creditCardNameOnCard.dirty || creditCardNameOnCard.touched)">
+                            <mat-error *ngIf="creditCardNameOnCard.errors.required">Name is required</mat-error>
+                            <mat-error *ngIf="creditCardNameOnCard.errors.minlength">Name must be at least 2 characters
+                              long</mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Card Number</mat-label>
+                            <input matInput formControlName="cardNumber" type="text">
+                          </mat-form-field>
+                          <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)">
+                            <mat-error *ngIf="creditCardNumber.errors.required">
+                              Card Number is required
+                            </mat-error>
+                            <mat-error *ngIf="creditCardNumber.errors.pattern">
+                              Card Number must be 16 digits long
+                            </mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Security Code</mat-label>
+                            <input matInput formControlName="securityCode" type="text">
+                          </mat-form-field>
+                          <div
+                            *ngIf="creditCardSecurityCode.invalid && (creditCardSecurityCode.dirty || creditCardSecurityCode.touched)">
+                            <mat-error *ngIf="creditCardSecurityCode.errors.required">
+                              Security Code is required
+                            </mat-error>
+                            <mat-error *ngIf="creditCardSecurityCode.errors.pattern">
+                              Security Code must be 3 digits long
+                            </mat-error>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Expiration Month</mat-label>
+                            <mat-select formControlName="expirationMonth">
+                              <mat-option *ngFor="let month of creditCardMonths" [value]="month">
+                                {{month}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Expiration Year</mat-label>
+                            <mat-select formControlName="expirationYear" (ngModelChange)="handleMonthsAndYears()">
+                              <mat-option *ngFor="let year of creditCardYears" [value]="year">
+                                {{year}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+
+                    <div class="card mb-4 border shadow-0">
+                      <div class="p-4 d-flex justify-content-between" *ngIf="!isAuthenticated">
+                        <div style="padding: 10px;">
+                          <h2>Please sign in to continue</h2>
+                          <button routerLink="/login" mat-raised-button color="primary">Sign in</button>
+                        </div>
+                      </div>
+                      <div class="p-4 d-flex justify-content-between" *ngIf="isAuthenticated">
+                        <div style="padding: 10px;">
+                          <h2>Proceed to purchase</h2>
+                          <button mat-raised-button color="primary" type="submit">Purchase</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Checkout -->
+
+        <!-- Already acc box -->
+
+      </div>
+
+      <!-- Summary and Items in cart snap -->
+      <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+
+        <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+          <h6 class="mb-3">Summary</h6>
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">Total Quantity:</p>
+            <p class="mb-2">{{totalQuantity}}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">Shipping cost:</p>
+            <p class="mb-2">free</p>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">Total price:</p>
+            <p class="mb-2 fw-bold">{{totalPrice | currency: 'USD'}}</p>
+          </div>
+
+          <div class="input-group mt-3 mb-4">
+            <input type="text" class="form-control border" name="" placeholder="Promo code" />
+            <button class="btn btn-light text-primary border">Apply</button>
+          </div>
+
+          <hr />
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

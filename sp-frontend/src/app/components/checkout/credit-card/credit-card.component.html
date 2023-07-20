@@ -1,0 +1,84 @@
+<div id="creditCard" [formGroup]="form" style="padding-top: 10px;">
+    <div class="form-group col-md-4" formGroupName="creditCard" >
+        <mat-form-field appearance="fill">
+            <mat-label>Card Type</mat-label>
+            <mat-select formControlName="cardType">
+              <mat-option value="visa">Visa</mat-option>
+              <mat-option value="mastercard">MasterCard</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <div *ngIf="creditCardType.invalid && (creditCardType.dirty || creditCardType.touched)">
+            <mat-error *ngIf="creditCardType.errors.required">Card Type is required</mat-error>
+        </div>
+    </div>
+    <div class="form-group col-md-4" formGroupName="creditCard" >
+        <mat-form-field appearance="fill">
+            <mat-label>Name on card</mat-label>
+            <input matInput formControlName="nameOnCard" type="text" >
+        </mat-form-field>
+        <div *ngIf="creditCardNameOnCard.invalid && (creditCardNameOnCard.dirty || creditCardNameOnCard.touched)" >
+            <mat-error *ngIf="creditCardNameOnCard.errors.required">Name is required</mat-error>
+            <mat-error *ngIf="creditCardNameOnCard.errors.minlength">Name must be  at least 2 characters long</mat-error>
+        </div>
+    </div>
+    <div class="form-group col-md-4" formGroupName="creditCard" >
+        <mat-form-field appearance="fill">
+            <mat-label>Card Number</mat-label>
+            <input matInput formControlName="cardNumber" type="text" >
+        </mat-form-field>
+        <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)">
+            <mat-error *ngIf="creditCardNumber.errors.required">
+               Card Number is required
+           </mat-error> 
+           <mat-error *ngIf="creditCardNumber.errors.pattern">
+               Card Number must be 16 digits long
+           </mat-error>
+       </div>
+    </div>
+
+    
+    <div class="form-group col-md-4" formGroupName="creditCard">
+        <mat-form-field appearance="fill">
+            <mat-label>Security Code</mat-label>
+            <input matInput formControlName="securityCode" type="text" >
+        </mat-form-field>
+        <div *ngIf="creditCardSecurityCode.invalid && (creditCardSecurityCode.dirty || creditCardSecurityCode.touched)" >
+            <mat-error *ngIf="creditCardSecurityCode.errors.required">
+               Security Code is required
+           </mat-error> 
+           <mat-error *ngIf="creditCardSecurityCode.errors.pattern">
+               Security Code must be 3 digits long
+           </mat-error>
+       </div>
+    </div>
+    <div class="form-group col-md-4" formGroupName="creditCard" >
+        <mat-form-field appearance="fill">
+            <mat-label>Expiration Month</mat-label>
+            <mat-select 
+                formControlName="expirationMonth">
+                <mat-option  
+                    *ngFor="let month of creditCardMonths"  
+                    [value]="month">
+                    {{month}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form-group col-md-4" formGroupName="creditCard" >
+        <mat-form-field appearance="fill">
+            <mat-label >Expiration Year</mat-label>
+            <mat-select 
+                formControlName="expirationYear" 
+                (ngModelChange)="handleMonthsAndYears()">
+                <mat-option  
+                    *ngFor="let year of creditCardYears"  
+                    [value]="year">
+                    {{year}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+    </div>
+</div>
+<br/>
+<button mat-raised-button color="primary"  matStepperNext (click)="step4Submitted()">Next</button>

@@ -1,0 +1,12 @@
+<div class="input-group float-center" >
+    <div class="form-outline" style="width: 80%;">
+      <input #myText
+      placeholder="Search for data ..."
+      (keyup.enter)="doSearch(myText.value)"     
+      type="search" 
+      id="form1" class="form-control" />
+    </div>
+    <button (click)="doSearch(myText.value)" type="button" class="btn btn-primary shadow-0">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>

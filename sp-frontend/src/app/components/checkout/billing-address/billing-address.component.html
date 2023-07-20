@@ -1,0 +1,70 @@
+<div class="input-space">
+    <label class="au-checkbox">
+        <mat-checkbox (change)="copyShippingAddressToBillingAddress($event.checked)">
+            Billing Address same as Shipping Address
+        </mat-checkbox>
+    </label>
+</div>
+
+<div id="billingAddress" [formGroup]="form">
+    <div class="form-group col-md-4" formGroupName="billingAddress" >
+        <mat-form-field appearance="fill">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country" (ngModelChange)="listCountryStates('billingAddress')">
+              <mat-option *ngFor="let country of countries" [ngValue]="country" [value]="country">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <div *ngIf="billingAddressCountry.invalid && (billingAddressCountry.dirty || billingAddressCountry.touched)">
+            <mat-error *ngIf="billingAddressCountry.errors.required">Country is required</mat-error>
+        </div>
+    </div>
+    <div class="form-group col-md-4" formGroupName="billingAddress" >
+        <mat-form-field appearance="fill">
+            <mat-label>Street</mat-label>
+            <input matInput formControlName="street" type="text">
+        </mat-form-field>
+        <div *ngIf="billingAddressStreet.invalid && (billingAddressStreet.dirty || billingAddressStreet.touched)">
+            <mat-error *ngIf="billingAddressStreet.errors.required">Street is required</mat-error>
+            <mat-error *ngIf="billingAddressStreet.errors.minlength">Street must be  at least 2 characters long</mat-error>
+        </div>
+    </div>
+    <div class="form-group col-md-4" formGroupName="billingAddress" >
+        <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" type="text">
+        </mat-form-field>
+        <div *ngIf="billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)">
+            <mat-error *ngIf="billingAddressCity.errors.required">City is required</mat-error>
+            <mat-error *ngIf="billingAddressCity.errors.minlength">City must be  at least 2 characters long</mat-error>
+        </div>
+    </div>
+
+    <div class="form-group col-md-4" formGroupName="billingAddress" >
+        <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state">
+              <mat-option *ngFor="let state of billingAddressStates" [ngValue]="state" [value]="state">
+                {{state.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <div *ngIf="billingAddressState.invalid && (billingAddressState.dirty || billingAddressState.touched)">
+            <mat-error *ngIf="billingAddressState.errors.required">State is required</mat-error>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-4" formGroupName="billingAddress" >
+        <mat-form-field appearance="fill">
+            <mat-label>Zip Code</mat-label>
+            <input matInput formControlName="zipCode" type="text">
+        </mat-form-field>
+        <div *ngIf="billingAddressZipCode.invalid && (billingAddressZipCode.dirty || billingAddressZipCode.touched)">
+            <mat-error *ngIf="billingAddressZipCode.errors.required">ZipCode is required</mat-error>
+            <mat-error *ngIf="billingAddressZipCode.errors.pattern">ZipCode must be 6 numbers long</mat-error>
+        </div>
+    </div>
+</div>
+<br/>
+<button mat-raised-button color="primary"  matStepperNext (click)="step3Submitted()">Next</button>

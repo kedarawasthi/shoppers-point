@@ -1,0 +1,10 @@
+<a class="border rounded py-2 px-3 nav-link d-flex align-items-center" 
+   
+    routerLink="/cart-details" > 
+
+    <mat-icon  [matBadge]="totalQuantity" 
+    [matBadgeHidden]="totalQuantity==0 && totalPrice==0"
+    >
+        shopping_cart
+    </mat-icon>
+</a>

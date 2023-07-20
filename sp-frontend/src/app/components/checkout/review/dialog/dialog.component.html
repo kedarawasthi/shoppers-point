@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Review Following Details</h2>
+
+<mat-dialog-content>
+  
+    <div class="container">
+        <div class="row">
+            <div>
+                <div>Customer Details:</div>
+                <div>{{purchase.customer.firstName}}</div>
+                <div>{{purchase.customer.lastName}}</div>
+                <div>{{purchase.customer.email}}</div>
+            </div>
+            <div>
+                <div>Shipping Address Details:</div>
+                <div>{{purchase.shippingAddress.country}}</div>
+                <div>{{purchase.shippingAddress.state}}</div>
+                <div>{{purchase.shippingAddress.street}}</div>
+                <div>{{purchase.shippingAddress.city}}</div>
+                <div>{{purchase.shippingAddress.zipCode}}</div>
+            </div>
+            <div>
+                <div>Billing Address Details:</div>
+                <div>{{purchase.billingAddress.country}}</div>
+                <div>{{purchase.billingAddress.state}}</div>
+                <div>{{purchase.billingAddress.street}}</div>
+                <div>{{purchase.billingAddress.city}}</div>
+                <div>{{purchase.billingAddress.zipCode}}</div>
+            </div>
+            <div>
+                <div>Order Details:</div>
+                <div>{{purchase.order.totalPrice}}</div>
+                <div>{{purchase.order.totalQuantity}}</div>
+            </div>
+            <div>
+                <div>Order Item Details:</div>
+                <div *ngFor="let tempItem of purchase.orderItems">
+                    <div>{{tempItem.imageUrl}}</div>
+                    <div>{{tempItem.quantity}}</div>
+                    <div>{{tempItem.unitPrice}}</div>
+                    <div>{{tempItem.productId}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="close()">Close</button>
+    <button mat-raised-button color="warn" (click)="save()">Save</button>
+</mat-dialog-actions>

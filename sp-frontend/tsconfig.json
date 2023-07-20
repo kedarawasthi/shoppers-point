@@ -2,13 +2,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+
+      "okta": ["./node_modules/@okta/okta-signin-widget/types/packages/@okta/courage-dist/types/index.d.ts"],
+  
+    },
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

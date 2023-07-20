@@ -1,0 +1,17 @@
+
+.app-toolbar {
+    height: 80px;
+    padding-top: 5px;
+    background-color: dodgerblue;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.example-sidenav {
+    padding: 20px;
+    width: 14.5%;
+    background-color: #f87217;
+}
+

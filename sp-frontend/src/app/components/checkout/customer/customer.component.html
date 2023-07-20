@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div id="customer" [formGroup]="form">
+            <div class="form-group col-md-4" formGroupName="customer" >
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName"   placeholder="fill first name">
+                </mat-form-field>
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                    <mat-error *ngIf="firstName.errors.required">firstName is required</mat-error>
+                    <mat-error *ngIf="firstName.errors.minlength">firstName must be  at least 2 characters long</mat-error>
+                </div>
+            </div>
+        
+        
+            <div class="form-group col-md-4" formGroupName="customer" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName"   placeholder="fill last name" >
+                </mat-form-field>
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                    <mat-error *ngIf="lastName.errors.required">lastName is required</mat-error>
+                    <mat-error *ngIf="lastName.errors.minlength">lastName must be  at least 2 characters long</mat-error>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" formGroupName="customer" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email"  placeholder="fill email">
+                </mat-form-field>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <mat-error *ngIf="email.errors.required">email is required</mat-error>
+                    <mat-error *ngIf="email.errors.pattern">email must be  of type abc@csd.com</mat-error>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button mat-raised-button color="primary"  matStepperNext (click)="step1Submitted()">Next</button>

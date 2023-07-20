@@ -1,0 +1,42 @@
+<div class="login-status-header">
+
+    <div *ngIf="isAuthenticated && userFullName" class="login-status-user-info">
+        Welcome back {{ userFullName }}!
+    </div>
+
+    <a *ngIf="!isAuthenticated" routerLink="/login"
+        class="me-1 border rounded py-1 px-1 nav-link d-flex align-items-center">
+        <i class="fas fa-user-alt m-1 me-md-2"></i>
+        <p class="d-none d-md-block mb-0">Sign in</p>
+
+    </a>
+    <a *ngIf="isAuthenticated" (click)="logout()"
+        class="me-1 border rounded py-1 px-1 nav-link d-flex align-items-center">
+        <i class="fas fa-user-alt m-1 me-md-2">
+        </i>
+        <p class="d-none d-md-block mb-0">Sign Out</p>
+    </a>
+    <a routerLink="/members" class="me-1 border rounded py-1 px-1 nav-link d-flex align-items-center">
+
+        <p class="d-none d-md-block mb-0">Members</p>
+    </a>
+    <a *ngIf="isAuthenticated" 
+        routerLink="/order-history" 
+        class="me-1 border rounded py-1 px-1 nav-link d-flex align-items-center">
+        <p class="d-none d-md-block mb-0">Orders</p>
+    </a>
+</div>
+
+
+<!-- 
+<div class="login-status-header">
+
+    <div *ngIf="isAuthenticated && userFullName" class="login-status-user-info">
+        Welcome back {{ userFullName }}!
+    </div>
+
+    <button *ngIf="!isAuthenticated" routerLink="/login" class="security-btn">Login</button>
+
+    <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</button>
+
+</div> -->
