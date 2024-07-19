@@ -15,15 +15,15 @@ Versions Used by me (latest)
 •	Spring Boot 3.0.5 (JDK 17)
 
 
-User Requirements:
-1.	Show List of products
-2.	Add products to Shopping Cart
-3.	Shopping Cart Checkout
-4.	User Login/Logout Security
-5.	Track prev orders for logged in users
+# User Requirements:
+•	Show List of products
+•	Add products to Shopping Cart
+•	Shopping Cart Checkout
+•	User Login/Logout Security
+•	Track prev orders for logged in users
 
 
-Release Plan
+# Release Plan
 Release 1.0
 • Show a list of products
 Release 2.0
